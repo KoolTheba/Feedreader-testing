@@ -1,4 +1,4 @@
-# Feed reader testing project
+# Feedreader testing
 
 ## Context
 In this project I was given a web-based application that reads RSS feeds. 
