@@ -1,38 +1,38 @@
-$(function() {
+$((() => {
     
-    describe('RSS Feeds', function() {
+    describe('RSS Feeds', () => {
 
-        it('are defined', function() {
+        it('are defined', () => {
             expect(allFeeds).toBeDefined();
             expect(Array.isArray(allFeeds)).toBe(true);
             expect(allFeeds.length).not.toBe(0);
         });
 
-        it('all feeds have a valid and defined URL', function() {
-            allFeeds.forEach(function(feed){
-                expect(feed.url).toBeDefined();
-                expect(typeof(feed.url)).toBe("string");
-                expect(feed.url.length).not.toEqual(0);
+        it('all feeds have a valid and defined URL', () => {
+            allFeeds.forEach(({url}) => {
+                expect(url).toBeDefined();
+                expect(typeof(url)).toBe("string");
+                expect(url.length).not.toEqual(0);
             });
         });
 
-        it('all feeds have a valid and defined name', function() {
-            allFeeds.forEach(function(feed){
-                expect(feed.name).toBeDefined();
-                expect(typeof(feed.name)).toBe("string");
-                expect(feed.name.length).not.toEqual(0);
+        it('all feeds have a valid and defined name', () => {
+            allFeeds.forEach(({name}) => {
+                expect(name).toBeDefined();
+                expect(typeof(name)).toBe("string");
+                expect(name.length).not.toEqual(0);
             });
         });
     });
 
 
-    describe('RSS Feeds', function() {
+    describe('RSS Feeds', () => {
         
-        it('menu element is hidden by default', function() {
+        it('menu element is hidden by default', () => {
             expect(document.body).toHaveClass('menu-hidden');
         });
 
-         it('menu changes visibility when clicked', function() {
+         it('menu changes visibility when clicked', () => {
              const menu = document.querySelector(".menu-icon-link")
              menu.click();
              expect(document.body).not.toHaveClass('menu-hidden');
@@ -42,31 +42,29 @@ $(function() {
     });
 
 
-    describe('Initial Entries', function() {
-        beforeEach(function(done) {
+    describe('Initial Entries', () => {
+        beforeEach(done => {
             loadFeed(0, done)
         });
         
-        it('it shows data entry', function() {
+        it('it shows data entry', () => {
          expect(document.querySelector(".feed .entry")).not.toEqual(null);
         });
     });
 
 
-    describe('New Feed Selection', function() {
+    describe('New Feed Selection', () => {
         
         const feed = document.querySelector(".feed"); 
         let entriesList = [];
-        beforeEach(function(done){
+        beforeEach(done => {
            loadFeed(0);
-          entriesList =  Array.from(feed.children).map(function(entry){
-               return entry.innerText;
-           });
+          entriesList =  Array.from(feed.children).map(({innerText}) => innerText);
            loadFeed(1, done);
         });
         
-        it("content changes", function(){
+        it("content changes", () => {
             expect(entriesList).not.toContain(feed.children[0].innerText)
         }); 
     });
-}());
+})());
