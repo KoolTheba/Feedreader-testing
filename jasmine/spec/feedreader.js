@@ -58,9 +58,10 @@ $((() => {
         const feed = document.querySelector(".feed"); 
         let entriesList = [];
         beforeEach(done => {
-           loadFeed(0);
-          entriesList =  Array.from(feed.children).map(({innerText}) => innerText);
-           loadFeed(1, done);
+           loadFeed(0, () => {
+                entriesList =  Array.from(feed.children).map(({innerText}) => innerText);
+                loadFeed(1, done);
+           });
         });
         
         it("content changes", () => {
